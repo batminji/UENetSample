@@ -3,11 +3,17 @@
 
 #include "MyGameModeBase.h"
 #include "MyPlayerController.h"
+#include "MyPlayer.h"
+#include "MyHUD.h"
 #include "Kismet/KismetSystemLibrary.h"
 
 AMyGameModeBase::AMyGameModeBase()
 {
 	PlayerControllerClass = AMyPlayerController::StaticClass();
+
+	DefaultPawnClass = AMyPlayer::StaticClass();
+
+	HUDClass = AMyHUD::StaticClass();
 }
 
 void AMyGameModeBase::PreLogin(const FString& Options, const FString& Address, const FUniqueNetIdRepl& UniqueId, FString& ErrorMessage)
