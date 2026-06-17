@@ -3,3 +3,7 @@
 
 #include "LobbyPlayerController.h"
 
+void ALobbyPlayerController::BeginPlay()
+{
+	Super::BeginPlay();
+}

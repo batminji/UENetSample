@@ -13,5 +13,8 @@ UCLASS()
 class UENETSAMPLE_API ALobbyPlayerController : public APlayerController
 {
 	GENERATED_BODY()
+
+public:
+	virtual void BeginPlay() override;
 	
 };
