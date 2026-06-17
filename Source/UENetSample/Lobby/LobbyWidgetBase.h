@@ -10,6 +10,7 @@ class UButton;
 class UEditableTextBox;
 class UTextBlock;
 class UScrollBox;
+class UWidgetAnimation;
 
 UCLASS()
 class UENETSAMPLE_API ULobbyWidgetBase : public UUserWidget
@@ -34,6 +35,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void UpdateConnectionCount(const int32 InConnectionCount);
 	
+	UFUNCTION(BlueprintCallable)
+	void ShowStartButton();
+	
 public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (BindWidget))
 	TObjectPtr<UButton> StartButton;
@@ -52,4 +56,7 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (BindWidget))
 	TObjectPtr<UScrollBox> ChatBox;
+
+	UPROPERTY(Transient, EditDefaultsOnly, BlueprintReadOnly, Category = "Animation", meta = (BindWidgetAnim))
+	TObjectPtr<UWidgetAnimation> ShowButtonAnimation;
 };

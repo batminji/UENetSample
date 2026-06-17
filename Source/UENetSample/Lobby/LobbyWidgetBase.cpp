@@ -6,6 +6,7 @@
 #include "Components/EditableTextBox.h"
 #include "Components/TextBlock.h"
 #include "Components/ScrollBox.h"
+#include "Animation/WidgetAnimation.h"
 
 void ULobbyWidgetBase::NativeOnInitialized()
 {
@@ -50,4 +51,13 @@ void ULobbyWidgetBase::UpdateLeftTime(const int32 InLeftTime)
 
 void ULobbyWidgetBase::UpdateConnectionCount(const int32 InConnectionCount)
 {
+}
+
+void ULobbyWidgetBase::ShowStartButton()
+{
+	if(ShowButtonAnimation)
+	{
+		StartButton->SetVisibility(ESlateVisibility::Visible);
+		PlayAnimation(ShowButtonAnimation);
+	}
 }
