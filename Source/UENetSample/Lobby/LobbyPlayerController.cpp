@@ -5,6 +5,7 @@
 #include "LobbyWidgetBase.h"
 #include "Kismet/GameplayStatics.h"
 #include "LobbyGameModeBase.h"
+#include "LobbyGameStateBase.h"
 
 void ALobbyPlayerController::BeginPlay()
 {
@@ -16,6 +17,7 @@ void ALobbyPlayerController::BeginPlay()
 	}
 
 	ShowLobbyWidget();
+	UpdateConnectionCount();
 }
 
 void ALobbyPlayerController::ShowLobbyWidget()
@@ -32,5 +34,14 @@ void ALobbyPlayerController::ShowLobbyWidget()
 				LobbyWidget->ShowStartButton();
 			}
 		}
+	}
+}
+
+void ALobbyPlayerController::UpdateConnectionCount()
+{
+	ALobbyGameStateBase* LobbyGameState = GetWorld()->GetGameState<ALobbyGameStateBase>();
+	if(LobbyGameState && LobbyWidget)
+	{
+		LobbyWidget->UpdateConnectionCount(LobbyGameState->ConnectionCount);
 	}
 }

@@ -21,10 +21,13 @@ public:
 
 	virtual void Tick(float DeltaSeconds) override;
 	
+	UFUNCTION()
+	void OnRep_ConnectionCount();
+	
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Replicated)
 	int32 LeftTime = 180;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Replicated)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, ReplicatedUsing = OnRep_ConnectionCount)
 	int32 ConnectionCount = 0;
 };

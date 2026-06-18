@@ -18,6 +18,8 @@ public:
 
 	void ShowLobbyWidget();
 
+	void UpdateConnectionCount();
+
 public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "UI")
 	TSubclassOf<ULobbyWidgetBase> LobbyWidgetClass;

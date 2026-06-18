@@ -59,5 +59,6 @@ void ALobbyGameModeBase::UpdateGameStateCountConnection()
 	if (LobbyGameState)
 	{
 		LobbyGameState->ConnectionCount = ConnectionCount;
+		LobbyGameState->OnRep_ConnectionCount();
 	}
 }

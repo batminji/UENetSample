@@ -29,6 +29,14 @@ void ALobbyGameStateBase::Tick(float DeltaSeconds)
 	if (PlayerController && PlayerController->IsLocalPlayerController() && PlayerController->LobbyWidget)
 	{
 		PlayerController->LobbyWidget->UpdateLeftTime(LeftTime);
+	}
+}
+
+void ALobbyGameStateBase::OnRep_ConnectionCount()
+{
+	ALobbyPlayerController* PlayerController = Cast<ALobbyPlayerController>(UGameplayStatics::GetPlayerController(GetWorld(), 0));
+	if (PlayerController && PlayerController->IsLocalPlayerController() && PlayerController->LobbyWidget)
+	{
 		PlayerController->LobbyWidget->UpdateConnectionCount(ConnectionCount);
 	}
 }
