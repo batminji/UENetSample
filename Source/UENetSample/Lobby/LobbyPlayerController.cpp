@@ -3,6 +3,8 @@
 
 #include "LobbyPlayerController.h"
 #include "LobbyWidgetBase.h"
+#include "Kismet/GameplayStatics.h"
+#include "LobbyGameModeBase.h"
 
 void ALobbyPlayerController::BeginPlay()
 {

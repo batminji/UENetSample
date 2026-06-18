@@ -24,4 +24,7 @@ public:
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Replicated)
 	int32 LeftTime = 180;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Replicated)
+	int32 ConnectionCount = 0;
 };

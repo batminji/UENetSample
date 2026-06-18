@@ -17,7 +17,7 @@ public:
 	virtual void BeginPlay() override;
 
 	void ShowLobbyWidget();
-	
+
 public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "UI")
 	TSubclassOf<ULobbyWidgetBase> LobbyWidgetClass;

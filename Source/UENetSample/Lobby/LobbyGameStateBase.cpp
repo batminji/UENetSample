@@ -18,6 +18,7 @@ void ALobbyGameStateBase::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& 
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
 	DOREPLIFETIME(ALobbyGameStateBase, LeftTime);
+	DOREPLIFETIME(ALobbyGameStateBase, ConnectionCount);
 }
 
 void ALobbyGameStateBase::Tick(float DeltaSeconds)
@@ -28,5 +29,6 @@ void ALobbyGameStateBase::Tick(float DeltaSeconds)
 	if (PlayerController && PlayerController->IsLocalPlayerController() && PlayerController->LobbyWidget)
 	{
 		PlayerController->LobbyWidget->UpdateLeftTime(LeftTime);
+		PlayerController->LobbyWidget->UpdateConnectionCount(ConnectionCount);
 	}
 }
