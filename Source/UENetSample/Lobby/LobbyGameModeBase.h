@@ -26,6 +26,8 @@ public:
 	void CountConnection();
 
 	void UpdateGameStateCountConnection();
+
+	void StartGame();
 public:
 	FTimerHandle LeftTimerHandle;
 

@@ -32,6 +32,10 @@ public:
 	void C2S_SendMessage_Implementation(const FText& InMessage);
 	bool C2S_SendMessage_Validate(const FText& InMessage);
 
+	UFUNCTION(Client, Reliable)
+	void S2C_SendMessage(const FText& InMessage);
+	void S2C_SendMessage_Implementation(const FText& InMessage);
+
 public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "UI")
 	TSubclassOf<ULobbyWidgetBase> LobbyWidgetClass;

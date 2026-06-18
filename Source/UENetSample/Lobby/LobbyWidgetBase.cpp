@@ -8,6 +8,8 @@
 #include "Components/ScrollBox.h"
 #include "Animation/WidgetAnimation.h"
 #include "LobbyPlayerController.h"
+#include "LobbyGameModeBase.h"
+#include "Kismet/GameplayStatics.h"
 
 void ULobbyWidgetBase::NativeOnInitialized()
 {
@@ -31,12 +33,21 @@ void ULobbyWidgetBase::NativeOnInitialized()
 
 void ULobbyWidgetBase::OnStartButtonClicked()
 {
-
+	ALobbyGameModeBase* LobbyGameMode = Cast<ALobbyGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()));
+	if (LobbyGameMode)
+	{
+		LobbyGameMode->StartGame();
+	}
 }
 
 void ULobbyWidgetBase::OnSendButtonClicked()
 {
-	
+	ALobbyPlayerController* LobbyPlayerController = Cast<ALobbyPlayerController>(GetOwningPlayer());
+	if (LobbyPlayerController)
+	{
+		LobbyPlayerController->C2S_SendMessage(InputText->GetText());
+		InputText->SetText(FText::GetEmpty());
+	}
 }
 
 void ULobbyWidgetBase::OnInputTextCommitted(const FText& Text, ETextCommit::Type CommitMethod)
@@ -85,5 +96,19 @@ void ULobbyWidgetBase::ShowStartButton()
 	{
 		StartButton->SetVisibility(ESlateVisibility::Visible);
 		PlayAnimation(ShowButtonAnimation);
+	}
+}
+
+void ULobbyWidgetBase::AddChatMessage(const FText& InMessage)
+{
+	if(ChatBox)
+	{
+		UTextBlock* NewMessage = NewObject<UTextBlock>(ChatBox);
+		if(NewMessage)
+		{
+			NewMessage->SetText(InMessage);
+			ChatBox->AddChild(NewMessage);
+			ChatBox->ScrollToEnd();
+		}
 	}
 }

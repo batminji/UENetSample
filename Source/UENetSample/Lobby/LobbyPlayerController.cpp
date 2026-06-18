@@ -69,10 +69,25 @@ void ALobbyPlayerController::S2C_KickPlayer_Implementation()
 
 void ALobbyPlayerController::C2S_SendMessage_Implementation(const FText& InMessage)
 {
-
+	for(auto It = GetWorld()->GetPlayerControllerIterator(); It; ++It)
+	{
+		ALobbyPlayerController* PlayerController = Cast<ALobbyPlayerController>(It->Get());
+		if(PlayerController)
+		{
+			PlayerController->S2C_SendMessage(InMessage);
+		}
+	}
 }
 
 bool ALobbyPlayerController::C2S_SendMessage_Validate(const FText& InMessage)
 {
 	return true;
+}
+
+void ALobbyPlayerController::S2C_SendMessage_Implementation(const FText& InMessage)
+{
+	if(LobbyWidget)
+	{
+		LobbyWidget->AddChatMessage(InMessage);
+	}
 }

@@ -17,6 +17,11 @@ void ALobbyGameModeBase::BeginPlay()
 			ALobbyGameStateBase* LobbyGameState = GetGameState<ALobbyGameStateBase>();
 			if (LobbyGameState)
 			{
+				if (LobbyGameState->LeftTime <= 0)
+				{
+					GetWorld()->GetTimerManager().ClearTimer(LeftTimerHandle);
+					StartGame();
+				}
 				LobbyGameState->LeftTime--;
 			}
 		},
@@ -61,4 +66,9 @@ void ALobbyGameModeBase::UpdateGameStateCountConnection()
 		LobbyGameState->ConnectionCount = ConnectionCount;
 		LobbyGameState->OnRep_ConnectionCount();
 	}
+}
+
+void ALobbyGameModeBase::StartGame()
+{
+	GetWorld()->ServerTravel("InGame");
 }

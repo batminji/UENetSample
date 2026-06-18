@@ -37,6 +37,8 @@ public:
 	
 	UFUNCTION(BlueprintCallable)
 	void ShowStartButton();
+
+	void AddChatMessage(const FText& InMessage);
 	
 public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (BindWidget))
