@@ -50,15 +50,7 @@ void ALobbyGameModeBase::Logout(AController* Exiting)
 
 void ALobbyGameModeBase::CountConnection()
 {
-	ConnectionCount = 0;
-	for (FConstPlayerControllerIterator It = GetWorld()->GetPlayerControllerIterator(); It; ++It)
-	{
-		ALobbyPlayerController* PlayerController = Cast<ALobbyPlayerController>(*It);
-		if (PlayerController)
-		{
-			ConnectionCount++;
-		}
-	}
+	ConnectionCount = GetNumPlayers();
 }
 
 void ALobbyGameModeBase::UpdateGameStateCountConnection()
