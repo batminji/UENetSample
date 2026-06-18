@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "LobbyWidgetBase.h"
@@ -47,10 +47,14 @@ void ULobbyWidgetBase::OnInputTextChanged(const FText& Text)
 
 void ULobbyWidgetBase::UpdateLeftTime(const int32 InLeftTime)
 {
+	FString LeftTimeString = FString::Printf(TEXT("%d 초"), InLeftTime);
+	LeftTime->SetText(FText::FromString(LeftTimeString));
 }
 
 void ULobbyWidgetBase::UpdateConnectionCount(const int32 InConnectionCount)
 {
+	FString ConnectionCountString = FString::Printf(TEXT("%d 명"), InConnectionCount);
+	ConnectionCount->SetText(FText::FromString(ConnectionCountString));
 }
 
 void ULobbyWidgetBase::ShowStartButton()

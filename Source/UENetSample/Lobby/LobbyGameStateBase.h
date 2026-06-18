@@ -13,5 +13,15 @@ UCLASS()
 class UENETSAMPLE_API ALobbyGameStateBase : public AGameStateBase
 {
 	GENERATED_BODY()
+
+public:
+	ALobbyGameStateBase();
+
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
+	virtual void Tick(float DeltaSeconds) override;
 	
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Replicated)
+	int32 LeftTime = 180;
 };

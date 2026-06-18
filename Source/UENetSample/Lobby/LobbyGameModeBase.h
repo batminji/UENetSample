@@ -14,4 +14,11 @@ class UENETSAMPLE_API ALobbyGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
 	
+public:
+	virtual void BeginPlay() override;
+
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+
+public:
+	FTimerHandle LeftTimerHandle;
 };
