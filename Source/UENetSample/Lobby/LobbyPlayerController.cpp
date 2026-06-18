@@ -45,3 +45,15 @@ void ALobbyPlayerController::UpdateConnectionCount()
 		LobbyWidget->UpdateConnectionCount(LobbyGameState->ConnectionCount);
 	}
 }
+
+void ALobbyPlayerController::KickPlayer()
+{
+	for(FConstPlayerControllerIterator It = GetWorld()->GetPlayerControllerIterator(); It; ++It)
+	{
+		ALobbyPlayerController* PlayerController = Cast<ALobbyPlayerController>(*It);
+		if(PlayerController && PlayerController != this)
+		{
+			PlayerController->ClientTravel(TEXT("/Game/Maps/Step01"), TRAVEL_Absolute);
+		}
+	}
+}

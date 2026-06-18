@@ -20,6 +20,9 @@ public:
 
 	void UpdateConnectionCount();
 
+	UFUNCTION(BlueprintCallable)
+	void KickPlayer();
+
 public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "UI")
 	TSubclassOf<ULobbyWidgetBase> LobbyWidgetClass;
