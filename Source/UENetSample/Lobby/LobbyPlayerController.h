@@ -36,10 +36,19 @@ public:
 	void S2C_SendMessage(const FText& InMessage);
 	void S2C_SendMessage_Implementation(const FText& InMessage);
 
+	void ShowLoadingScreen();
+
+	UFUNCTION(Client, Reliable)
+	void S2C_ShowLoadingScreen();
+	void S2C_ShowLoadingScreen_Implementation();
+
 public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "UI")
 	TSubclassOf<ULobbyWidgetBase> LobbyWidgetClass;
 
 	UPROPERTY()
 	TObjectPtr<ULobbyWidgetBase> LobbyWidget;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "UI")
+	TSubclassOf<UUserWidget> LoadingScreenWidgetClass;
 };

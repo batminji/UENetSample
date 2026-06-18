@@ -91,3 +91,32 @@ void ALobbyPlayerController::S2C_SendMessage_Implementation(const FText& InMessa
 		LobbyWidget->AddChatMessage(InMessage);
 	}
 }
+
+void ALobbyPlayerController::ShowLoadingScreen()
+{
+	if (!HasAuthority())
+	{
+		return;
+	}
+
+	for(FConstPlayerControllerIterator It = GetWorld()->GetPlayerControllerIterator(); It; ++It)
+	{
+		ALobbyPlayerController* PlayerController = Cast<ALobbyPlayerController>(*It);
+		if (PlayerController)
+		{
+			PlayerController->S2C_ShowLoadingScreen();
+		}
+	}
+}
+
+void ALobbyPlayerController::S2C_ShowLoadingScreen_Implementation()
+{
+	if (LoadingScreenWidgetClass)
+	{
+		UUserWidget* LoadingScreenWidget = CreateWidget<UUserWidget>(this, LoadingScreenWidgetClass);
+		if(LoadingScreenWidget)
+		{
+			LoadingScreenWidget->AddToViewport();
+		}
+	}
+}

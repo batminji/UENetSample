@@ -33,6 +33,12 @@ void ULobbyWidgetBase::NativeOnInitialized()
 
 void ULobbyWidgetBase::OnStartButtonClicked()
 {
+	ALobbyPlayerController* LobbyPlayerController = Cast<ALobbyPlayerController>(GetOwningPlayer());
+	if (LobbyPlayerController)
+	{
+		LobbyPlayerController->ShowLoadingScreen();
+	}
+
 	ALobbyGameModeBase* LobbyGameMode = Cast<ALobbyGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()));
 	if (LobbyGameMode)
 	{
