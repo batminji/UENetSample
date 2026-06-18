@@ -23,6 +23,10 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void KickPlayer();
 
+	UFUNCTION(Client, Reliable)
+	void Client_KickPlayer();
+	void Client_KickPlayer_Implementation();
+
 public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "UI")
 	TSubclassOf<ULobbyWidgetBase> LobbyWidgetClass;

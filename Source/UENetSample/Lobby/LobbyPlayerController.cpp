@@ -53,7 +53,16 @@ void ALobbyPlayerController::KickPlayer()
 		ALobbyPlayerController* PlayerController = Cast<ALobbyPlayerController>(*It);
 		if(PlayerController && PlayerController != this)
 		{
-			PlayerController->ClientTravel(TEXT("/Game/Maps/Step01"), TRAVEL_Absolute);
+			PlayerController->Client_KickPlayer();
 		}
+	}
+}
+
+void ALobbyPlayerController::Client_KickPlayer_Implementation()
+{
+	UWorld* World = GetWorld();
+	if (World)
+	{
+		GEngine->HandleDisconnect(World, World->GetNetDriver());
 	}
 }
