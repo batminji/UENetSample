@@ -7,6 +7,7 @@
 #include "Components/TextBlock.h"
 #include "Components/ScrollBox.h"
 #include "Animation/WidgetAnimation.h"
+#include "LobbyPlayerController.h"
 
 void ULobbyWidgetBase::NativeOnInitialized()
 {
@@ -30,6 +31,7 @@ void ULobbyWidgetBase::NativeOnInitialized()
 
 void ULobbyWidgetBase::OnStartButtonClicked()
 {
+
 }
 
 void ULobbyWidgetBase::OnSendButtonClicked()
@@ -39,6 +41,26 @@ void ULobbyWidgetBase::OnSendButtonClicked()
 
 void ULobbyWidgetBase::OnInputTextCommitted(const FText& Text, ETextCommit::Type CommitMethod)
 {
+	ALobbyPlayerController* LobbyPlayerController = Cast<ALobbyPlayerController>(GetOwningPlayer());
+	if(!LobbyPlayerController)
+	{
+		return;
+	}
+
+	switch (CommitMethod)
+	{
+	case ETextCommit::OnEnter:
+	{
+		LobbyPlayerController->C2S_SendMessage(Text);
+		InputText->SetText(FText::GetEmpty());
+	}
+	break;
+	case ETextCommit::OnCleared:
+	{
+		InputText->SetUserFocus(LobbyPlayerController);
+	}
+	break;
+	}
 }
 
 void ULobbyWidgetBase::OnInputTextChanged(const FText& Text)

@@ -24,8 +24,13 @@ public:
 	void KickPlayer();
 
 	UFUNCTION(Client, Reliable)
-	void Client_KickPlayer();
-	void Client_KickPlayer_Implementation();
+	void S2C_KickPlayer();
+	void S2C_KickPlayer_Implementation();
+
+	UFUNCTION(Server, Reliable, WithValidation)
+	void C2S_SendMessage(const FText& InMessage);
+	void C2S_SendMessage_Implementation(const FText& InMessage);
+	bool C2S_SendMessage_Validate(const FText& InMessage);
 
 public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "UI")

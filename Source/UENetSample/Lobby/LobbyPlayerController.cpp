@@ -53,16 +53,26 @@ void ALobbyPlayerController::KickPlayer()
 		ALobbyPlayerController* PlayerController = Cast<ALobbyPlayerController>(*It);
 		if(PlayerController && PlayerController != this)
 		{
-			PlayerController->Client_KickPlayer();
+			PlayerController->S2C_KickPlayer();
 		}
 	}
 }
 
-void ALobbyPlayerController::Client_KickPlayer_Implementation()
+void ALobbyPlayerController::S2C_KickPlayer_Implementation()
 {
 	UWorld* World = GetWorld();
 	if (World)
 	{
 		GEngine->HandleDisconnect(World, World->GetNetDriver());
 	}
+}
+
+void ALobbyPlayerController::C2S_SendMessage_Implementation(const FText& InMessage)
+{
+
+}
+
+bool ALobbyPlayerController::C2S_SendMessage_Validate(const FText& InMessage)
+{
+	return true;
 }
