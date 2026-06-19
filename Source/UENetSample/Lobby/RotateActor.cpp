@@ -33,6 +33,20 @@ void ARotateActor::Tick(float DeltaTime)
 
 		ServerRotationYaw = GetActorRotation().Yaw;
 	}
+	else
+	{
+		ClientTimeSinceUpdate += DeltaTime;
+		if(ClientTimeLastUpdate < KINDA_SMALL_NUMBER)
+		{
+			return;
+		}
+
+		float CalculateRotationYaw = ServerRotationYaw + RotateSpeed * ClientTimeSinceUpdate;
+		float LerpAlpha = ClientTimeSinceUpdate / ClientTimeLastUpdate;
+		float ClientNewRotationYaw = FMath::Lerp(ServerRotationYaw, CalculateRotationYaw, LerpAlpha);
+
+		SetActorRotation(FRotator(0.0f, ClientNewRotationYaw, 0.0f));
+	}
 }
 
 void ARotateActor::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
@@ -44,5 +58,8 @@ void ARotateActor::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLife
 void ARotateActor::OnRep_ServerRotationYaw()
 {
 	SetActorRotation(FRotator(0.0f, ServerRotationYaw, 0.0f));
+
+	ClientTimeLastUpdate = ClientTimeSinceUpdate;
+	ClientTimeSinceUpdate = 0.0f;
 }
 
